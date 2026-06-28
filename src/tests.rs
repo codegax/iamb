@@ -170,6 +170,7 @@ pub fn mock_dirs() -> DirectoryValues {
 
 pub fn mock_tunables() -> TunableValues {
     TunableValues {
+        case_insensitive_search: false,
         default_room: None,
         log_level: "warn".into(),
         max_log_files: 7,

@@ -516,6 +516,7 @@ impl SortOverrides {
 
 #[derive(Clone)]
 pub struct TunableValues {
+    pub case_insensitive_search: bool,
     pub log_level: String,
     pub max_log_files: usize,
     pub message_shortcode_display: bool,
@@ -544,6 +545,7 @@ pub struct TunableValues {
 
 #[derive(Clone, Default, Deserialize)]
 pub struct Tunables {
+    pub case_insensitive_search: Option<bool>,
     pub log_level: Option<String>,
     pub max_log_files: Option<usize>,
     pub message_shortcode_display: Option<bool>,
@@ -574,6 +576,7 @@ pub struct Tunables {
 impl Tunables {
     fn merge(self, other: Self) -> Self {
         Tunables {
+            case_insensitive_search: self.case_insensitive_search.or(other.case_insensitive_search),
             log_level: self.log_level.or(other.log_level),
             max_log_files: self.max_log_files.or(other.max_log_files),
             message_shortcode_display: self
@@ -609,6 +612,7 @@ impl Tunables {
 
     fn values(self) -> TunableValues {
         TunableValues {
+            case_insensitive_search: self.case_insensitive_search.unwrap_or(false),
             log_level: self.log_level.unwrap_or_else(|| "warn".to_string()),
             max_log_files: self.max_log_files.unwrap_or(7),
             message_shortcode_display: self.message_shortcode_display.unwrap_or(false),
