@@ -541,8 +541,7 @@ impl WindowOps<IambInfo> for IambWindow {
 
                 if need_fetch {
                     if let Ok(mems) = store.application.worker.members(room_id.clone()) {
-                        let case_insensitive =
-                            store.application.settings.tunables.case_insensitive_search;
+                        let case_insensitive = store.application.settings.tunables.ignorecase;
                         let mut items = mems
                             .into_iter()
                             .map(|m| MemberItem::new(m, room_id.clone(), case_insensitive))
@@ -918,7 +917,7 @@ impl GenericChatItem {
             store.application.names.insert(alias.to_string(), room_id.to_owned());
         }
 
-        let case_insensitive = store.application.settings.tunables.case_insensitive_search;
+        let case_insensitive = store.application.settings.tunables.ignorecase;
 
         GenericChatItem {
             room_info,
@@ -1051,7 +1050,7 @@ impl RoomItem {
             store.application.names.insert(alias.to_string(), room_id.to_owned());
         }
 
-        let case_insensitive = store.application.settings.tunables.case_insensitive_search;
+        let case_insensitive = store.application.settings.tunables.ignorecase;
 
         RoomItem { room_info, name, alias, unread, case_insensitive }
     }
@@ -1167,7 +1166,7 @@ impl DirectItem {
         let unread = info.unreads(&store.application.settings);
         info.tags.clone_from(&room_info.deref().1);
 
-        let case_insensitive = store.application.settings.tunables.case_insensitive_search;
+        let case_insensitive = store.application.settings.tunables.ignorecase;
 
         DirectItem { room_info, name, alias, unread, case_insensitive }
     }
@@ -1287,7 +1286,7 @@ impl SpaceItem {
             store.application.names.insert(alias.to_string(), room_id.to_owned());
         }
 
-        let case_insensitive = store.application.settings.tunables.case_insensitive_search;
+        let case_insensitive = store.application.settings.tunables.ignorecase;
 
         SpaceItem { room_info, name, alias, case_insensitive }
     }
